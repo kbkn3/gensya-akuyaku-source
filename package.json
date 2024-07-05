@@ -27,5 +27,6 @@
     "tailwindcss": "^3.4.4",
     "vite": "^5.2.12",
     "wrangler": "^3.57.2"
-  }
+  },
+  "packageManager": "bun@1.1.17"
 }
