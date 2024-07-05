@@ -1,5 +1,19 @@
 const SiteTitle = '現代社会で乙女ゲームの悪役令嬢をするのはちょっと大変 資料集'
 
+const menuItems = [
+  { title: 'Home', href: '/' },
+  { title: 'Random Article', href: '/' },
+  { title: 'About', href: '/' },
+  { title: 'Contact', href: '/' },
+]
+const footerMenuItems = [
+  { h3: 'WikipediaStyle', items: ['About WikipediaStyle', 'Contact us', 'Donate'] },
+  { h3: 'Community', items: ['Community portal', 'Forum', 'Help center'] },
+  { h3: 'Contribute', items: ['Edit pages', 'Create account', 'Upload file'] },
+  { h3: 'Tools', items: ['What links here', 'Special pages', 'Page information'] },
+  { h3: 'Languages', items: ['English', '日本語', 'Español'] },
+]
+
 export default function BaseLayout({
   children,
   title = '資料集',
@@ -11,16 +25,50 @@ export default function BaseLayout({
   top?: boolean
 }) {
   return (
-    <div className='min-h-screen bg-gray-100 flex flex-col'>
-      <header className='bg-white shadow'>
-        <div className='container mx-auto px-4 py-6 flex justify-between items-center'>
-          <div className='md:hidden relative mr-4 material-symbols-outlined'>&#xe5d2;</div>
-          {/* top ページの場合は h1 、 top ページ以外は div で扱う */}
-          {top ? (
-            <h1 className='text-2xl font-bold'>{SiteTitle}</h1>
-          ) : (
-            <div className='text-2xl font-bold'>{SiteTitle}</div>
-          )}
+    <div className='min-h-screen bg-gray-100'>
+      <header className='bg-white shadow flex flex-col'>
+        <div className='navbar bg-base-100 justify-center items-center mx-auto'>
+          <details className='flex-none md:hidden dropdown'>
+            <summary
+              className='btn btn-square btn-ghost'
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                className='inline-block h-5 w-5 stroke-current'
+                aria-hidden='true'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M4 6h16M4 12h16M4 18h16'
+                />
+              </svg>
+            </summary>
+            <ul
+              className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'
+            >
+              {menuItems.map(item => (
+                <li key={item.title}>
+                  <a href={item.href}>{item.title}</a>
+                </li>
+              ))}
+            </ul>
+          </details>
+          <div>
+            {/* top ページの場合は h1 、 top ページ以外は div で扱う */}
+            {top ? (
+              <h1 className='text-xl font-bold'>
+                <a href='/'>{SiteTitle}</a>
+              </h1>
+            ) : (
+              <div className='text-xl font-bold'>
+                <a href='/'>{SiteTitle}</a>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
@@ -31,26 +79,13 @@ export default function BaseLayout({
           <div className='bg-white shadow rounded p-4'>
             <h2 className='text-xl font-semibold mb-4'>メインメニュー</h2>
             <ul className='space-y-2'>
-              <li>
-                <a href='/' className='text-blue-600 hover:underline'>
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href='/' className='text-blue-600 hover:underline'>
-                  Random Article
-                </a>
-              </li>
-              <li>
-                <a href='/' className='text-blue-600 hover:underline'>
-                  About
-                </a>
-              </li>
-              <li>
-                <a href='/' className='text-blue-600 hover:underline'>
-                  Contact
-                </a>
-              </li>
+              {menuItems.map(item => (
+                <li key={item.title}>
+                  <a href={item.href} className='text-blue-600 hover:underline'>
+                    {item.title}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </nav>
@@ -73,106 +108,20 @@ export default function BaseLayout({
       <footer className='bg-gray-200 mt-8 py-8'>
         <div className='container mx-auto px-4'>
           <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8'>
-            <div>
-              <h3 className='font-semibold text-lg mb-3'>WikipediaStyle</h3>
-              <ul className='space-y-2'>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    About WikipediaStyle
-                  </a>
-                </li>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    Contact us
-                  </a>
-                </li>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    Donate
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className='font-semibold text-lg mb-3'>Community</h3>
-              <ul className='space-y-2'>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    Community portal
-                  </a>
-                </li>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    Forum
-                  </a>
-                </li>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    Help center
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className='font-semibold text-lg mb-3'>Contribute</h3>
-              <ul className='space-y-2'>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    Edit pages
-                  </a>
-                </li>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    Create account
-                  </a>
-                </li>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    Upload file
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className='font-semibold text-lg mb-3'>Tools</h3>
-              <ul className='space-y-2'>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    What links here
-                  </a>
-                </li>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    Special pages
-                  </a>
-                </li>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    Page information
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className='font-semibold text-lg mb-3'>Languages</h3>
-              <ul className='space-y-2'>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    English
-                  </a>
-                </li>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    日本語
-                  </a>
-                </li>
-                <li>
-                  <a href='/' className='text-blue-600 hover:underline'>
-                    Español
-                  </a>
-                </li>
-              </ul>
-            </div>
+            {footerMenuItems.map(item => (
+              <div key={item.h3}>
+                <h3 className='font-semibold text-lg mb-3'>{item.h3}</h3>
+                <ul className='space-y-2'>
+                  {item.items.map(subItem => (
+                    <li key={subItem}>
+                      <a href='/' className='text-blue-600 hover:underline'>
+                        {subItem}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
           <div className='mt-8 text-center text-gray-600'>
             <p>&copy; 2024 WikipediaStyle. All rights reserved.</p>
