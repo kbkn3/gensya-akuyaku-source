@@ -11,9 +11,9 @@ export default {
   daisyui: {
     themes: [
       {
-        wikipediaTheme: {
+        wikipedia: {
           primary: '#3366cc', // Wikipedia's blue links
-          secondary: '#a2a9b1', // Light gray for secondary elements
+          secondary: '#f3f4f6', // Light gray for secondary elements
           accent: '#eaecf0', // Very light gray for accents
           neutral: '#202122', // Almost black for text
           'base-100': '#ffffff', // White background
