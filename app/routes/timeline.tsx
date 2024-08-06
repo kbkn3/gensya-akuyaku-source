@@ -86,7 +86,7 @@ export default function AppleProductTimeline() {
     <BaseLayout title="年表">
       <Header />
       {/* {snippet} */}
-      <div className="max-w-6xl mx-auto p-4" style={{ wordBreak: 'auto-phrase' }}>
+      <div className="max-w-6xl mx-auto p-4">
         {timelineData.map((item) => (
           <TimelineItem {...item} />
         ))}
