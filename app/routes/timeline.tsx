@@ -72,7 +72,7 @@ const TimelineItem = ({
 const Header = () => {
   // TimelineItemに合わせたヘッダーを作成する
   return (
-    <div className="sticky top-0 z-50 navbar bg-slate-200 rounded-md pb-2">
+    <div className="sticky top-0 z-20 navbar bg-slate-200 rounded-md pb-2">
       <div className="flex w-full items-start justify-between">
         <div className="text-2xl font-bold text-right pr-4">乙女ゲー世界</div>
         <div className="text-2xl font-bold text-right pr-4">史実</div>
