@@ -49,7 +49,7 @@ export default function BaseLayout({
               </svg>
             </summary>
             <ul
-              className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'
+              className='dropdown-content menu bg-base-100 rounded-box z-[20] w-52 p-2 shadow'
             >
               {menuItems.map(item => (
                 <li key={item.title}>
