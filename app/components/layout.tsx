@@ -2,7 +2,8 @@ const SiteTitle = '現代社会で乙女ゲームの悪役令嬢をするのは�
 
 const menuItems = [
   { title: 'Home', href: '/' },
-  { title: 'Random Article', href: '/' },
+  { title: '年表', href: '/timeline' },
+  { title: 'ランダム表示', href: '/random' },
   { title: 'About', href: '/' },
   { title: 'Contact', href: '/' },
 ]

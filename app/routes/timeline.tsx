@@ -1,93 +1,95 @@
 import BaseLayout from "../components/layout";
+import { timelineData } from "./timelineData";
+import { html } from 'hono/html'
 
-interface TimelineData {
-  year: number;
-  fiction: { event: string; book: string; link?: string }[];
-  reality: { event: string; book?: string; link?: string }[];
+const snippet = html`
+<script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"></script>
+`
+
+interface TimelineEventProps {
+  month: string;
+  eventName: string;
+  link: string;
 }
-export default function TimelineComparison() {
-  const data: TimelineData[] = [
-    {
-      year: 1997,
-      fiction: [
-        {
-          event: "6月 極東銀行、三海証券を買収",
-          book: "ep.9 お嬢様飛翔 その3 12/24 投稿",
-          link: "https://ncode.syosetu.com/n3297eu/9/",
-        },
-      ],
-      reality: [
-        {
-          event: "9月 北海道拓殖銀行、北海道銀行との合併の延期を発表",
-          book: "北海道拓殖銀行 - Wikipedia",
-          link: "https://ja.wikipedia.org/wiki/%E5%8C%97%E6%B5%B7%E9%81%93%E6%8B%93%E6%AE%96%E9%8A%80%E8%A1%8C",
-        },
-        {
-          event: "11月 三洋証券、会社更生法の適用を申請",
-          book: "三洋証券 - Wikipedia",
-          link: "https://ja.wikipedia.org/wiki/%E4%B8%89%E6%B4%8B%E8%A8%BC%E5%88%B8",
-        },
-      ],
-    },
-    {
-      year: 2008,
-      fiction: [
-        {
-          event: "9/15 投資銀行のリーザンシスターズが連邦倒産法第11章（日本でいう民事再生法）を申請",
-          book: "ep.1 2008年9月15日",
-          link: "https://ncode.syosetu.com/n3297eu/1/",
-        },
-      ],
-      reality: [
-        {
-          event: "9/15 投資銀行のリーマン・ブラザーズが連邦倒産法第11章（日本でいう民事再生法）を申請",
-          book: "リーマン・ショック - Wikipedia",
-          link: "https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%BC%E3%83%9E%E3%83%B3%E3%83%BB%E3%82%B7%E3%83%A7%E3%83%83%E3%82%AF",
-        },
-      ],
-    },
-  ];
+export interface TimelineItemProps {
+  year: number;
+  fictionalEvents: TimelineEventProps[];
+  realityEvents: TimelineEventProps[];
+}
+const TimelineEvent = ({ month, eventName, link }: TimelineEventProps) => (
+  <div className="mb-6 line-break-strict">
+    <div className="font-semibold text-sm text-gray-600">{month}</div>
+    <div className="font-semibold text-md">{eventName}</div>
+    {link ? (
+      <a
+        href={link}
+        className="text-sm text-blue-600 float-right"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+          className="w-3 h-3"
+          fill="currentColor"
+        >
+          <path d="M432 320H400a16 16 0 0 0 -16 16V448H64V128H208a16 16 0 0 0 16-16V80a16 16 0 0 0 -16-16H48A48 48 0 0 0 0 112V464a48 48 0 0 0 48 48H400a48 48 0 0 0 48-48V336A16 16 0 0 0 432 320zM488 0h-128c-21.4 0-32.1 25.9-17 41l35.7 35.7L135 320.4a24 24 0 0 0 0 34L157.7 377a24 24 0 0 0 34 0L435.3 133.3 471 169c15 15 41 4.5 41-17V24A24 24 0 0 0 488 0z" />
+        </svg>
+      </a>
+    ) : null}
+  </div>
+);
 
+const TimelineItem = ({
+  year,
+  fictionalEvents,
+  realityEvents,
+}: TimelineItemProps) => (
+  <div className="relative pb-12">
+    <div className="absolute left-1/2 -ml-0.5 w-0.5 h-full bg-gray-200"></div>
+    <div className="relative flex items-start justify-center">
+      <div className="flex w-full items-start justify-between">
+        <div className="w-5/12 text-right pr-4">
+          {fictionalEvents.map((event) => (
+            <TimelineEvent {...event} />
+          ))}
+        </div>
+        <div className="z-10 flex flex-col items-center">
+          <div className="flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full text-white text-lg font-medium">
+            {year}
+          </div>
+        </div>
+        <div className="w-5/12 pl-4">
+          {realityEvents.map((event) => (
+            <TimelineEvent {...event} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const Header = () => {
+  // TimelineItemに合わせたヘッダーを作成する
   return (
-    <BaseLayout title="仮想戦記と史実の比較タイムライン">
-      <div className="container mx-auto font-sans text-neutral">
-        <table className="table w-full border-collapse">
-          <thead>
-            <tr className="bg-accent text-sm  font-bold">
-              <th className="text-center border border-zinc-400 p-1">年号</th>
-              <th className="text-center border border-zinc-400 p-1">
-                仮想戦記
-              </th>
-              <th className="text-center border border-zinc-400 p-1">史実</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <tr
-                key={item}
-                className={index % 2 === 0 ? "bg-base-100" : "bg-accent"}
-              >
-                <td className="text-center border border-zinc-400">
-                  {item.year}
-                </td>
-                <td className="border border-zinc-400">
-                  <ul className="">
-                    {item.fiction.map((event, _i) => (
-                      <li key={event}>{event.event}</li>
-                    ))}
-                  </ul>
-                </td>
-                <td className="border border-zinc-400">
-                  <ul>
-                    {item.reality.map((event, _i) => (
-                      <li key={event}>{event.event}</li>
-                    ))}
-                  </ul>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="sticky top-0 z-50 navbar bg-slate-200 rounded-md pb-2">
+      <div className="flex w-full items-start justify-between">
+        <div className="text-2xl font-bold text-right pr-4">乙女ゲー世界</div>
+        <div className="text-2xl font-bold text-right pr-4">史実</div>
+      </div>
+    </div>
+  );
+};
+
+export default function AppleProductTimeline() {
+  return (
+    <BaseLayout title="年表">
+      <Header />
+      {/* {snippet} */}
+      <div className="max-w-6xl mx-auto p-4" style={{ wordBreak: 'auto-phrase' }}>
+        {timelineData.map((item) => (
+          <TimelineItem {...item} />
+        ))}
       </div>
     </BaseLayout>
   );
