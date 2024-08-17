@@ -33,4 +33,4 @@ export default {
       },
     ],
   },
-} satisfies Config as Config;
+} satisfies Config as Config

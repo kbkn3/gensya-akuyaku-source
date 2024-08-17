@@ -8,10 +8,16 @@ const menuItems = [
   { title: 'Contact', href: '/' },
 ]
 const footerMenuItems = [
-  { h3: 'WikipediaStyle', items: ['About WikipediaStyle', 'Contact us', 'Donate'] },
+  {
+    h3: 'WikipediaStyle',
+    items: ['About WikipediaStyle', 'Contact us', 'Donate'],
+  },
   { h3: 'Community', items: ['Community portal', 'Forum', 'Help center'] },
   { h3: 'Contribute', items: ['Edit pages', 'Create account', 'Upload file'] },
-  { h3: 'Tools', items: ['What links here', 'Special pages', 'Page information'] },
+  {
+    h3: 'Tools',
+    items: ['What links here', 'Special pages', 'Page information'],
+  },
   { h3: 'Languages', items: ['English', '日本語', 'Español'] },
 ]
 
@@ -30,9 +36,7 @@ export default function BaseLayout({
       <header className='bg-white shadow flex flex-col'>
         <div className='navbar bg-base-100 justify-center items-center mx-auto'>
           <details className='flex-none md:hidden dropdown'>
-            <summary
-              className='btn btn-square btn-ghost'
-            >
+            <summary className='btn btn-square btn-ghost'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -48,9 +52,7 @@ export default function BaseLayout({
                 />
               </svg>
             </summary>
-            <ul
-              className='dropdown-content menu bg-base-100 rounded-box z-[30] w-52 p-2 shadow'
-            >
+            <ul className='dropdown-content menu bg-base-100 rounded-box z-[30] w-52 p-2 shadow'>
               {menuItems.map(item => (
                 <li key={item.title}>
                   <a href={item.href}>{item.title}</a>
