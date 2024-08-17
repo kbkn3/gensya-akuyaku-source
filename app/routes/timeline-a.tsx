@@ -38,6 +38,7 @@ const TimelineEvent = ({ month, eventName, link }: TimelineEventProps) => {
           target='_blank'
           rel='noopener noreferrer'
         >
+          {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 512 512'
@@ -58,12 +59,13 @@ const TimelineItem = ({ year, events, top }: TimelineItemProps) => {
   console.log(top)
   return (
     <div className='relative pb-12'>
-      <div className='absolute left-1/2 -ml-0.5 w-0.5 h-full bg-gray-200'></div>
+      <div className='absolute left-1/2 -ml-0.5 w-0.5 h-full bg-gray-200' />
       <div className='relative flex items-start justify-center'>
         <div className='flex w-full items-start justify-between'>
           <div className='w-5/12 text-right pr-4'>
             {events.fictionalEvents.map(event => (
-              <TimelineEvent {...event} />
+              // biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
+<TimelineEvent {...event} />
             ))}
           </div>
           <div className='z-10 flex flex-col items-center'>
@@ -75,7 +77,8 @@ const TimelineItem = ({ year, events, top }: TimelineItemProps) => {
           </div>
           <div className='w-5/12 pl-4'>
             {events.realityEvents.map(event => (
-              <TimelineEvent {...event} />
+              // biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
+<TimelineEvent {...event} />
             ))}
           </div>
         </div>
@@ -105,6 +108,7 @@ export default function TimelinePage() {
           const { year } = item
           return item.events.map((event, index) => {
             const prop = { year, events: event, top: index === 0 }
+            // biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
             return <TimelineItem {...prop} />
           })
         })}

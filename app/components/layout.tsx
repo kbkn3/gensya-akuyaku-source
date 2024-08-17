@@ -32,7 +32,7 @@ export default function BaseLayout({
   top?: boolean
 }) {
   return (
-    <div className='min-h-screen bg-gray-100'>
+    <div className='min-h-screen bg-gray-100 flex flex-col'>
       <header className='bg-white shadow flex flex-col'>
         <div className='navbar bg-base-100 justify-center items-center mx-auto'>
           <details className='flex-none md:hidden dropdown'>
@@ -94,8 +94,8 @@ export default function BaseLayout({
         </nav>
 
         {/* Content */}
-        <main className='w-full md:w-3/4 lg:w-4/5 md:pl-8'>
-          <article className='bg-white shadow rounded p-6 prose prose-h1:text-3xl prose-h1:font-bold prose-h1:mb-4 prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-2 prose-p:mb-4'>
+        <main className='w-full md:w-3/4 lg:w-4/5 md:pl-8 flex-grow'>
+          <article className='bg-white shadow rounded p-6 prose !max-w-none prose-h1:text-3xl prose-h1:font-bold prose-h1:mb-4 prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-2 prose-p:mb-4'>
             {/* top ページの場合は div 、 top ページ以外は h1 で扱う */}
             {top ? (
               <div className='text-3xl font-bold mb-4'>{title}</div>
