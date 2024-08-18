@@ -1,3 +1,5 @@
+import Header1 from "./header1"
+
 const SiteTitle = '現代社会で乙女ゲームの悪役令嬢をするのはちょっと大変 資料集'
 
 const menuItems = [
@@ -102,6 +104,7 @@ export default function BaseLayout({
             ) : (
               <h1>{title}</h1>
             )}
+            <Header1 title={title} />
             {children}
           </article>
         </main>
