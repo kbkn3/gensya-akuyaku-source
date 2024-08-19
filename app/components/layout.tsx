@@ -98,13 +98,7 @@ export default function BaseLayout({
         {/* Content */}
         <main className='w-full md:w-3/4 lg:w-4/5 md:pl-8 flex-grow'>
           <article className='bg-white shadow rounded p-6 prose !max-w-none prose-h1:text-3xl prose-h1:font-bold prose-h1:mb-4 prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-2 prose-p:mb-4'>
-            {/* top ページの場合は div 、 top ページ以外は h1 で扱う */}
-            {top ? (
-              <div className='text-3xl font-bold mb-4'>{title}</div>
-            ) : (
-              <h1>{title}</h1>
-            )}
-            <Header1 title={title} />
+            <Header1 title={title} top={top}/>
             {children}
           </article>
         </main>
