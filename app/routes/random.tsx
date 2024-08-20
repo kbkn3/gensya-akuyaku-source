@@ -12,7 +12,7 @@ randomRoute.get('/', c => {
     return `${id.replace(/\.mdx$/, '')}`
   })
   // 固定ページ
-  const pageLinks = ['/contact', '/timeline', '/sitemap', '/privacy-policy', '/terms-of-use']
+  const pageLinks = ['/contact', '/timeline', '/privacy-policy', '/terms-of-use']
 
   const links = [...postsLinks, ...pageLinks]
 
