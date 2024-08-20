@@ -25,7 +25,7 @@ export default function Top() {
           if (module.frontmatter) {
             return (
               <li>
-                <a href={`${id.replace(/\.mdx$/, '')}`}>
+                <a href={`${id.replace(/\.mdx$/, '')}`} className={module.frontmatter.subTitle?.includes('建設中') ? 'line-through text-slate-400':''}>
                   {module.frontmatter.title}{module.frontmatter.subTitle ? `: ${module.frontmatter.subTitle}` : ''}
                 </a>
               </li>
