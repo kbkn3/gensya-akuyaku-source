@@ -26,3 +26,7 @@
 .moon {
   box-shadow: 4px 0 0 0 white;
 }
+body {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}

@@ -1,17 +1,36 @@
+import Header1 from './header1'
+
 const SiteTitle = '現代社会で乙女ゲームの悪役令嬢をするのはちょっと大変 資料集'
 
 const menuItems = [
   { title: 'Home', href: '/' },
-  { title: 'Random Article', href: '/' },
-  { title: 'About', href: '/' },
-  { title: 'Contact', href: '/' },
+  { title: '年表', href: '/timeline' },
+  { title: 'ランダム表示', href: '/random' },
+  { title: 'Contact', href: '/contact' },
 ]
 const footerMenuItems = [
-  { h3: 'WikipediaStyle', items: ['About WikipediaStyle', 'Contact us', 'Donate'] },
-  { h3: 'Community', items: ['Community portal', 'Forum', 'Help center'] },
-  { h3: 'Contribute', items: ['Edit pages', 'Create account', 'Upload file'] },
-  { h3: 'Tools', items: ['What links here', 'Special pages', 'Page information'] },
-  { h3: 'Languages', items: ['English', '日本語', 'Español'] },
+  {
+    h3: '原作情報',
+    items: [
+      '小説家になろう',
+      '書籍（オーバーラップ）',
+      'コミカライズ（コミックガルド＋）',
+    ],
+    href: [
+      'https://ncode.syosetu.com/n3297eu/',
+      'https://over-lap.co.jp/narou/865547429/',
+      'https://comic-gardo.com/episode/316190247005433227',
+    ],
+  },
+  {
+    h3: '原作者',
+    items: ['Twitter', 'Lit Link', '小説家になろう'],
+    href: [
+      'https://twitter.com/hokubukyuushuu',
+      'https://lit.link/hokubukyuushuu',
+      'https://mypage.syosetu.com/238604/',
+    ],
+  },
 ]
 
 export default function BaseLayout({
@@ -25,13 +44,11 @@ export default function BaseLayout({
   top?: boolean
 }) {
   return (
-    <div className='min-h-screen bg-gray-100'>
+    <div className='min-h-screen bg-gray-100 flex flex-col'>
       <header className='bg-white shadow flex flex-col'>
         <div className='navbar bg-base-100 justify-center items-center mx-auto'>
           <details className='flex-none md:hidden dropdown'>
-            <summary
-              className='btn btn-square btn-ghost'
-            >
+            <summary className='btn btn-square btn-ghost'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -47,9 +64,7 @@ export default function BaseLayout({
                 />
               </svg>
             </summary>
-            <ul
-              className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'
-            >
+            <ul className='dropdown-content menu bg-base-100 rounded-box z-[30] w-52 p-2 shadow'>
               {menuItems.map(item => (
                 <li key={item.title}>
                   <a href={item.href}>{item.title}</a>
@@ -91,14 +106,9 @@ export default function BaseLayout({
         </nav>
 
         {/* Content */}
-        <main className='w-full md:w-3/4 lg:w-4/5 md:pl-8'>
-          <article className='bg-white shadow rounded p-6 prose prose-h1:text-3xl prose-h1:font-bold prose-h1:mb-4 prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-2 prose-p:mb-4'>
-            {/* top ページの場合は div 、 top ページ以外は h1 で扱う */}
-            {top ? (
-              <div className='text-3xl font-bold mb-4'>{title}</div>
-            ) : (
-              <h1>{title}</h1>
-            )}
+        <main className='w-full md:w-3/4 lg:w-4/5 md:pl-8 flex-grow'>
+          <article className='bg-white shadow rounded p-6 prose !max-w-none prose-h1:text-3xl prose-h1:font-bold prose-h1:mb-4 prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-2 prose-p:mb-4'>
+            <Header1 title={title} top={top} />
             {children}
           </article>
         </main>
@@ -112,9 +122,12 @@ export default function BaseLayout({
               <div key={item.h3}>
                 <h3 className='font-semibold text-lg mb-3'>{item.h3}</h3>
                 <ul className='space-y-2'>
-                  {item.items.map(subItem => (
+                  {item.items.map((subItem, index) => (
                     <li key={subItem}>
-                      <a href='/' className='text-blue-600 hover:underline'>
+                      <a
+                        href={item.href[index]}
+                        className='text-blue-600 hover:underline'
+                      >
                         {subItem}
                       </a>
                     </li>
@@ -126,11 +139,14 @@ export default function BaseLayout({
           <div className='mt-8 text-center text-gray-600'>
             <p>&copy; 2024 WikipediaStyle. All rights reserved.</p>
             <p className='mt-2'>
-              <a href='/' className='text-blue-600 hover:underline'>
+              <a
+                href='/privacy-policy'
+                className='text-blue-600 hover:underline'
+              >
                 Privacy policy
               </a>{' '}
               &bull;{' '}
-              <a href='/' className='text-blue-600 hover:underline'>
+              <a href='/terms-of-use' className='text-blue-600 hover:underline'>
                 Terms of use
               </a>
             </p>

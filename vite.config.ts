@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
       plugins: [client()],
       build: {
         rollupOptions: {
-          input: ["/app/style.css"]
+          input: ['/app/style.css'],
         },
       },
     }
@@ -28,8 +28,9 @@ export default defineConfig(({ mode }) => {
       }),
       mdx({
         jsxImportSource: 'hono/jsx',
-        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter]
+        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
       }),
-      pages()]
+      pages(),
+    ],
   }
 })
