@@ -26,7 +26,7 @@ export default function Top() {
             return (
               <li>
                 <a href={`${id.replace(/\.mdx$/, '')}`}>
-                  {module.frontmatter.title}
+                  {module.frontmatter.title}{module.frontmatter.subTitle ? `: ${module.frontmatter.subTitle}` : ''}
                 </a>
               </li>
             )

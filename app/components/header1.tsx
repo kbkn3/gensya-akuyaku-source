@@ -14,9 +14,9 @@ export default function Header1({
   top,
 }: { title: string; top: boolean }) {
   return (
-    <div className='flex justify-center items-center m-0 bg-white font-sans'>
+    <div className='flex justify-center items-center mb-10 bg-white font-sans'>
       <div className='w-full flex items-center bg-black border-1 border-white outline outline-2 outline-black outline-offset-2'>
-        <div className='flex'>
+        <div className='hidden sm:flex'>
           <Rhombus />
           <Rhombus />
           <Rhombus />
@@ -33,15 +33,15 @@ export default function Header1({
           </div>
           {/* top ページの場合は div 、 top ページ以外は h1 で扱う */}
           {top ? (
-            <div className='font-bold m-2 mx-2 text-white leading-none md:text-lg text-xl'>{title}</div>
+            <div className='font-bold m-2 mx-2 text-white leading-none sm:text-sm md:text-lg text-xl'>{title}</div>
           ) : (
-            <h1 className='block !m-2 mx-2 text-white !leading-none !md:text-lg !text-xl '>
+            <h1 className='block mx-2 !my-2 text-white !sm:text-sm !md:text-base !text-xl'>
               {title}
             </h1>
           )}
         </div>
         <div class='grow' />
-        <div className='flex'>
+        <div className='hidden sm:flex'>
           <Rhombus />
           <Rhombus />
           <Rhombus />

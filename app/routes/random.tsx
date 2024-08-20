@@ -1,5 +1,5 @@
 import { Hono } from 'hono'
-import { Meta } from './types'
+import type { Meta } from './types'
 
 const randomRoute = new Hono()
 
@@ -12,7 +12,7 @@ randomRoute.get('/', c => {
     return `${id.replace(/\.mdx$/, '')}`
   })
   // 固定ページ
-  const pageLinks = ['/about', '/contact', '/timeline', '/sitemap']
+  const pageLinks = ['/contact', '/timeline', '/sitemap', '/privacy-policy', '/terms-of-use']
 
   const links = [...postsLinks, ...pageLinks]
 
