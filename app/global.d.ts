@@ -1,10 +1,10 @@
 import {} from 'hono'
-import type { Meta } from './routes/types';
+import type { Meta } from './routes/types'
 
 type Head = {
   title?: string
-  frontmatter?: Meta;
-  entryName?: string;
+  frontmatter?: Meta
+  entryName?: string
 }
 
 declare module 'hono' {

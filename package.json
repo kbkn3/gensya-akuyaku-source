@@ -3,7 +3,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "format": "@biomejs/biome format --write .",
+    "format": "biome format --write ./app",
+    "lint": "biome lint --write ./app",
     "build": "vite build --mode client && vite build",
     "preview": "wrangler pages dev",
     "deploy": "$npm_execpath run build && wrangler pages deploy"
@@ -11,10 +12,12 @@
   "private": true,
   "dependencies": {
     "@mdx-js/rollup": "^3.0.1",
+    "@resvg/resvg-js": "^2.6.2",
     "hono": "^4.5.6",
     "honox": "^0.1.24",
     "remark-frontmatter": "^5.0.0",
-    "remark-mdx-frontmatter": "^5.0.0"
+    "remark-mdx-frontmatter": "^5.0.0",
+    "satori": "^0.10.14"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",

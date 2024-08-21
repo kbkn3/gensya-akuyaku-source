@@ -8,6 +8,11 @@ import { defineConfig } from 'vite'
 import client from 'honox/vite/client'
 
 export default defineConfig(({ mode }) => {
+  const common = {
+    ssr: {
+      external: ['satori', '@resvg/resvg-js'],
+    },
+  }
   if (mode === 'client') {
     return {
       plugins: [client()],
@@ -19,6 +24,7 @@ export default defineConfig(({ mode }) => {
     }
   }
   return {
+    ssr: common.ssr,
     plugins: [
       honox({
         devServer: { adapter },

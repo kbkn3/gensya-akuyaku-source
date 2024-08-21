@@ -1,38 +1,48 @@
 import { Style } from 'hono/css'
 import { jsxRenderer, useRequestContext } from 'hono/jsx-renderer'
 import { Link, Script } from 'honox/server'
-import { siteName } from '../constants'
+import { SITE_TITLE } from '../constants'
 import BaseLayout, { menuItems } from '../components/layout'
 
-// biome-ignore lint/correctness/noUnusedVariables: <explanation>
-export default jsxRenderer(({ children, title, entryName, frontmatter }) => {
+export default jsxRenderer(({ children, frontmatter }) => {
   const c = useRequestContext()
   const currentPath = c.req.routePath
 
   const pageTitle = frontmatter?.title
-    ? `${frontmatter.title} | ${siteName}`
-    : menuItems.filter(item => item.href.includes(currentPath))[0]?.title ?
-      `${menuItems.filter(item => item.href.includes(currentPath))[0]?.title} | ${siteName}` : siteName
-  
+    ? `${frontmatter.title} | ${SITE_TITLE}`
+    : menuItems.filter(item => item.href.includes(currentPath))[0]?.title
+      ? `${menuItems.filter(item => item.href.includes(currentPath))[0]?.title} | ${SITE_TITLE}`
+      : SITE_TITLE
+
   const headerTitle =
     frontmatter?.title ??
     menuItems.filter(item => item.href.includes(currentPath))[0]?.title ??
-    siteName
-  
+    SITE_TITLE
+
   const description =
     frontmatter?.description ??
     '「現代社会で乙女ゲームの悪役令嬢をするのはちょっと大変」のファンメイド資料サイトです'
-  
+
   const isTop = currentPath === '/'
 
-    return (
+  const ogImagePath = `/ogp?title=${encodeURIComponent(
+    frontmatter?.title
+      ? `${frontmatter.title}`
+      : menuItems.filter(item => item.href.includes(currentPath))[0]?.title,
+  )}${frontmatter?.subTitle ? `&subTitle=${encodeURIComponent(frontmatter.subTitle)}` : ''}`
+
+  return (
     <html lang='ja'>
       <head>
         <meta charset='utf-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta http-equiv='content-language' content='ja' />
         {/* OGP */}
-
+        <meta property='og:site_name' content={SITE_TITLE} />
+        <meta property='og:title' content={pageTitle} />
+        <meta property='og:description' content={description} />
+        <meta property='og:image' content={ogImagePath} />
+        <meta property='og:locale' content='ja_JP'/>
         {/* Twitter */}
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:site' content='@kbkn3' />
@@ -50,7 +60,9 @@ export default jsxRenderer(({ children, title, entryName, frontmatter }) => {
         <Style />
       </head>
       <body>
-        <BaseLayout title={headerTitle} top={isTop}>{children}</BaseLayout>
+        <BaseLayout title={headerTitle} top={isTop}>
+          {children}
+        </BaseLayout>
       </body>
     </html>
   )

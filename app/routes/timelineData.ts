@@ -232,7 +232,7 @@ export const timelineData: TimelineProps[] = [
             link: 'https://ja.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC%E5%82%B5%E5%88%B8%E4%BF%A1%E7%94%A8%E9%8A%80%E8%A1%8C#%E3%83%90%E3%83%96%E3%83%AB%E5%B4%A9%E5%A3%8A%E3%81%A8%E7%B5%8C%E5%96%B6%E7%A0%B4%E7%B6%BB',
           },
         ],
-      }
+      },
     ],
   },
   {
@@ -255,7 +255,7 @@ export const timelineData: TimelineProps[] = [
             link: 'https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%BC%E3%83%9A%E3%83%B3%E3%83%BB%E3%82%B7%E3%83%A7%E3%83%83%E3%82%AF',
           },
         ],
-      }
+      },
     ],
-  }
+  },
 ]
