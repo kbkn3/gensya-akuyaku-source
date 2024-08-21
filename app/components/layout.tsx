@@ -1,8 +1,7 @@
+import { siteName } from '../constants'
 import Header1 from './header1'
 
-const SiteTitle = '現代社会で乙女ゲームの悪役令嬢をするのはちょっと大変 資料集'
-
-const menuItems = [
+export const menuItems = [
   { title: 'Home', href: '/' },
   { title: '年表', href: '/timeline' },
   { title: 'ランダム表示', href: '/random' },
@@ -76,11 +75,11 @@ export default function BaseLayout({
             {/* top ページの場合は h1 、 top ページ以外は div で扱う */}
             {top ? (
               <h1 className='text-xl font-bold'>
-                <a href='/'>{SiteTitle}</a>
+                <a href='/'>{siteName}</a>
               </h1>
             ) : (
               <div className='text-xl font-bold'>
-                <a href='/'>{SiteTitle}</a>
+                <a href='/'>{siteName}</a>
               </div>
             )}
           </div>

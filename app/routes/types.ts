@@ -1,4 +1,5 @@
 export type Meta = {
   title: string
-  subTitle: string
+  subTitle?: string
+  description?: string
 }
