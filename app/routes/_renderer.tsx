@@ -25,11 +25,11 @@ export default jsxRenderer(({ children, frontmatter }) => {
 
   const isTop = currentPath === '/'
 
-  const ogImagePath = `/ogp?title=${encodeURIComponent(
-    frontmatter?.title
-      ? `${frontmatter.title}`
-      : menuItems.filter(item => item.href.includes(currentPath))[0]?.title,
-  )}${frontmatter?.subTitle ? `&subTitle=${encodeURIComponent(frontmatter.subTitle)}` : ''}`
+  // const ogImagePath = `/ogp?title=${encodeURIComponent(
+  //   frontmatter?.title
+  //     ? `${frontmatter.title}`
+  //     : menuItems.filter(item => item.href.includes(currentPath))[0]?.title,
+  // )}${frontmatter?.subTitle ? `&subTitle=${encodeURIComponent(frontmatter.subTitle)}` : ''}`
 
   return (
     <html lang='ja'>
@@ -41,7 +41,7 @@ export default jsxRenderer(({ children, frontmatter }) => {
         <meta property='og:site_name' content={SITE_TITLE} />
         <meta property='og:title' content={pageTitle} />
         <meta property='og:description' content={description} />
-        <meta property='og:image' content={ogImagePath} />
+        {/* <meta property='og:image' content={ogImagePath} /> */}
         <meta property='og:locale' content='ja_JP'/>
         {/* Twitter */}
         <meta name='twitter:card' content='summary_large_image' />
