@@ -33,7 +33,9 @@ export default function Header1({
           </div>
           {/* top ページの場合は div 、 top ページ以外は h1 で扱う */}
           {top ? (
-            <div className='font-bold m-2 mx-2 text-white leading-none sm:text-sm md:text-lg text-xl'>{title}</div>
+            <div className='font-bold m-2 mx-2 text-white leading-none sm:text-sm md:text-lg text-xl'>
+              {title}
+            </div>
           ) : (
             <h1 className='block mx-2 !my-2 text-white !sm:text-sm !md:text-base !text-xl'>
               {title}

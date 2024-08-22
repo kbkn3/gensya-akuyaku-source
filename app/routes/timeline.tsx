@@ -1,4 +1,3 @@
-import BaseLayout from '../components/layout'
 import { timelineData } from './timelineData'
 
 interface TimelineEventProps {
@@ -59,7 +58,7 @@ const TimelineItem = ({ year, events, top }: TimelineItemProps) => {
           <div className='w-5/12 text-right pr-4'>
             {events.fictionalEvents.map(event => (
               // biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
-<TimelineEvent {...event} />
+              <TimelineEvent {...event} />
             ))}
           </div>
           <div className='z-10 flex flex-col items-center'>
@@ -72,7 +71,7 @@ const TimelineItem = ({ year, events, top }: TimelineItemProps) => {
           <div className='w-5/12 pl-4'>
             {events.realityEvents.map(event => (
               // biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
-<TimelineEvent {...event} />
+              <TimelineEvent {...event} />
             ))}
           </div>
         </div>
@@ -95,7 +94,7 @@ const Header = () => {
 
 export default function TimelinePage() {
   return (
-    <BaseLayout title='年表'>
+    <>
       <Header />
       <div className='max-w-6xl mx-auto p-4'>
         {timelineData.map(item => {
@@ -107,6 +106,6 @@ export default function TimelinePage() {
           })
         })}
       </div>
-    </BaseLayout>
+    </>
   )
 }

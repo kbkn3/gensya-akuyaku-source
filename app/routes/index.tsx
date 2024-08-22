@@ -1,4 +1,3 @@
-import BaseLayout from '../components/layout'
 import type { Meta } from './types'
 
 export default function Top() {
@@ -6,7 +5,7 @@ export default function Top() {
     eager: true,
   })
   return (
-    <BaseLayout top>
+    <>
       <h2>趣旨</h2>
       <p>
         このサイトは、「現代社会で乙女ゲームの悪役令嬢をするのはちょっと大変」のファンサイトです。
@@ -25,14 +24,24 @@ export default function Top() {
           if (module.frontmatter) {
             return (
               <li>
-                <a href={`${id.replace(/\.mdx$/, '')}`} className={module.frontmatter.subTitle?.includes('建設中') ? 'line-through text-slate-400':''}>
-                  {module.frontmatter.title}{module.frontmatter.subTitle ? `: ${module.frontmatter.subTitle}` : ''}
+                <a
+                  href={`${id.replace(/\.mdx$/, '')}`}
+                  className={
+                    module.frontmatter.subTitle?.includes('建設中')
+                      ? 'line-through text-slate-400'
+                      : ''
+                  }
+                >
+                  {module.frontmatter.title}
+                  {module.frontmatter.subTitle
+                    ? `: ${module.frontmatter.subTitle}`
+                    : ''}
                 </a>
               </li>
             )
           }
         })}
       </ul>
-    </BaseLayout>
+    </>
   )
 }
