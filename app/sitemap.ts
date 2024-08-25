@@ -80,17 +80,33 @@ export default function honoSitemapPlugin(
   }
 
   /**
+   * Get the value for a given URL based on patterns, checking from most specific to least specific.
+   * @param url
+   * @param patterns
+   * @param defaultValue
+   * @returns {string}
+   */
+  function getValueForUrl(url: string, patterns: Record<string, string>, defaultValue: string): string {
+    // /index -> /
+    const urlWithoutIndex = url.replace(/\/index$/, '/')
+    const sortedPatterns = Object.entries(patterns).sort((a, b) => b[0].length - a[0].length)
+    
+    for (const [pattern, value] of sortedPatterns) {
+      if (new RegExp(`^${pattern.replace(/\*/g, '.*')}$`).test(urlWithoutIndex)) {
+        return value
+      }
+    }
+    
+    return defaultValue
+  }
+
+  /**
    * Get the frequency for a given URL.
    * @param url
    * @returns {string}
    */
   function getFrequency(url: string): string {
-    for (const [pattern, freq] of Object.entries(frequency)) {
-      if (new RegExp(pattern).test(url)) {
-        return freq
-      }
-    }
-    return 'weekly' // default frequency
+    return getValueForUrl(url, frequency, 'weekly')
   }
 
   /**
@@ -99,29 +115,22 @@ export default function honoSitemapPlugin(
    * @returns {string}
    */
   function getPriority(url: string): string {
-    for (const [pattern, prio] of Object.entries(priority)) {
-      if (new RegExp(pattern).test(url)) {
-        return prio
-      }
-    }
-    return '0.5' // default priority
+    return getValueForUrl(url, priority, '0.5')
   }
   /**
    * Process the routes.
    * @param files
    * @param hostname
-   * @returns {string[]}
+   * @returns {Array<{ url: string; lastMod: string; changeFreq: string; priority: string }>}
    */
-  function processRoutes(files: string[], hostname: string): string[] {
+  function processRoutes(files: string[], hostname: string): { url: string; lastMod: string; changeFreq: string; priority: string }[] {
     const modifiedHostname = hostname.endsWith('/') ? hostname.slice(0, -1) : hostname;
     return files.map(file => {
       const route = file.substring(file.indexOf(routesDir) + routesDir.length)
       const withoutExtension = route.replace(/\.(tsx|mdx)$/, '')
-      if (withoutExtension === '/index') {
-        return modifiedHostname;
-      }
-  
-      return `${modifiedHostname}${withoutExtension}`
+      const url = withoutExtension==='/index' ? modifiedHostname :`${modifiedHostname}${withoutExtension}`
+      console.log(url)
+      return { url, lastMod: new Date().toISOString(), changeFreq: getFrequency(withoutExtension), priority: getPriority(withoutExtension) }
     })
   }
 
@@ -144,10 +153,10 @@ ${routes
   .map(
     page => `
   <url>
-    <loc>${page}/</loc>
-    <lastmod>${new Date().toISOString()}</lastmod>
-    <changefreq>${getFrequency(page)}</changefreq>
-    <priority>${getPriority(page)}</priority>
+    <loc>${page.url}/</loc>
+    <lastmod>${page.lastMod}</lastmod>
+    <changefreq>${page.changeFreq}</changefreq>
+    <priority>${page.priority}</priority>
   </url>
 `,
   )
