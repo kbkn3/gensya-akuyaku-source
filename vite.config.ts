@@ -6,6 +6,7 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import { defineConfig } from 'vite'
 import client from 'honox/vite/client'
+import Sitemap from 'vite-plugin-sitemap'
 
 export default defineConfig(({ mode }) => {
   if (mode === 'client') {
@@ -31,6 +32,7 @@ export default defineConfig(({ mode }) => {
         remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
       }),
       pages(),
+      Sitemap(),
     ],
   }
 })
