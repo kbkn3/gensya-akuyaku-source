@@ -6,7 +6,7 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import { defineConfig } from 'vite'
 import client from 'honox/vite/client'
-import { ssrSitemap } from './app/sitemap'
+import honoSitemapPlugin from './app/sitemap'
 
 export default defineConfig(({ mode }) => {
   if (mode === 'client') {
@@ -32,15 +32,8 @@ export default defineConfig(({ mode }) => {
         remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
       }),
       pages(),
-      ssrSitemap({
-        host: "https://localhost", // no trailing slash
-        // i18n: {
-        //   locales,
-        //   localeDefault,
-        // },
-        // exclude: env.VITE_APP_SITEMAP_EXCLUDES.split(",").map((page) =>
-        //   page.trim(),
-        // ),
+      honoSitemapPlugin({
+        hostname: import.meta.env.CF_PAGES_URL,
       }),
     ],
   }
