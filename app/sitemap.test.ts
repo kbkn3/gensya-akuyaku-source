@@ -47,24 +47,28 @@ describe('honoSitemapPlugin', () => {
       resolve(process.cwd(), 'dist', 'sitemap.xml'),
       expect.stringContaining('<loc>https://example.com/</loc>')
     )
+    expect(fs.writeFileSync).toHaveBeenCalledWith(
+      resolve(process.cwd(), 'dist', 'sitemap.xml'),
+      expect.stringContaining('<loc>https://example.com/about/</loc>')
+    )
   })
 })
 
 describe('isFilePathMatch', () => {
   it('should match valid file paths', () => {
-    expect(isFilePathMatch('/app/routes/index.tsx', [])).toBe(true)
-    expect(isFilePathMatch('/app/routes/about/index.tsx', [])).toBe(true)
-    expect(isFilePathMatch('/app/routes/.well-known/security.txt.tsx', [])).toBe(true)
+    expect(isFilePathMatch('/Users/abc/repo/app/routes/index.tsx', [])).toBe(true)
+    expect(isFilePathMatch('/Users/abc/repo/app/routes/about/index.tsx', [])).toBe(true)
+    expect(isFilePathMatch('/Users/abc/repo/app/routes/.well-known/security.txt.tsx', [])).toBe(true)
   })
 
   it('should not match invalid file paths', () => {
-    expect(isFilePathMatch('/app/routes/_layout.tsx', [])).toBe(false)
-    expect(isFilePathMatch('/app/routes/$id.tsx', [])).toBe(false)
-    expect(isFilePathMatch('/app/routes/test.spec.tsx', [])).toBe(false)
+    expect(isFilePathMatch('/Users/abc/repo/app/routes/$id.tsx', [])).toBe(false)
+    expect(isFilePathMatch('/Users/abc/repo/app/routes/test.spec.tsx', [])).toBe(false)
+    expect(isFilePathMatch('/Users/abc/repo/app/routes/_middleware.tsx', [])).toBe(false)
   })
 
   it('should exclude specified paths', () => {
-    expect(isFilePathMatch('/app/routes/admin/index.tsx', ['/admin'])).toBe(false)
+    expect(isFilePathMatch('/Users/abc/repo/app/routes/admin/index.tsx', ['/admin'])).toBe(false)
   })
 })
 
