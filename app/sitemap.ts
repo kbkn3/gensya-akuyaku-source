@@ -113,14 +113,15 @@ export default function honoSitemapPlugin(
    * @returns {string[]}
    */
   function processRoutes(files: string[], hostname: string): string[] {
+    const modifiedHostname = hostname.endsWith('/') ? hostname.slice(0, -1) : hostname;
     return files.map(file => {
       const route = file.substring(file.indexOf(routesDir) + routesDir.length)
       const withoutExtension = route.replace(/\.(tsx|mdx)$/, '')
       if (withoutExtension === '/index') {
-        return hostname
+        return modifiedHostname;
       }
-
-      return `${hostname}${withoutExtension}`
+  
+      return `${modifiedHostname}${withoutExtension}`
     })
   }
 

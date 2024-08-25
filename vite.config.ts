@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => {
       }),
       pages(),
       honoSitemapPlugin({
-        hostname: process.env.CF_PAGES_URL,
+        hostname: process.env.IS_PROD ? 'https://gensya-akuyaku-source.pages.dev/' :process.env.CF_PAGES_URL,
       }),
     ],
   }
