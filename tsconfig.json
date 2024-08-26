@@ -9,6 +9,9 @@
       "ESNext",
       "DOM"
     ],
+    "paths": {
+      "vite": ["./node_modules/vite"]
+    },
     "types": [
       "vite/client",
       "@cloudflare/workers-types",
