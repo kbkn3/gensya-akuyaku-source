@@ -22,6 +22,7 @@ export default defineConfig(({ mode }) => {
   }
   return {
     plugins: [
+      pages(),
       honox({
         devServer: { adapter },
         client: {
@@ -32,7 +33,6 @@ export default defineConfig(({ mode }) => {
         jsxImportSource: 'hono/jsx',
         remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
       }),
-      pages(),
       honoSitemapPlugin({
         hostname: process.env.IS_PROD ? 'https://gensya-akuyaku-source.pages.dev/' :process.env.CF_PAGES_URL,
         exclude: ['/random'],

@@ -3,8 +3,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:wrangler": "wrangler pages dev --local --proxy 8080 --port 5173 && vite",
     "format": "biome format --write ./app",
     "lint": "biome lint --write ./app",
+    "migration:generate": "drizzle-kit generate",
+    "migration:apply:local": "wrangler d1 migrations apply gensya --local",
+    "migration:apply:remote": "wrangler d1 migrations apply gensya --remote",
     "build": "vite build --mode client && vite build",
     "preview": "wrangler pages dev",
     "deploy": "$npm_execpath run build && wrangler pages deploy"
@@ -14,7 +18,7 @@
     "@mdx-js/rollup": "^3.0.1",
     "drizzle-kit": "^0.24.2",
     "drizzle-orm": "^0.33.0",
-    "hono": "^4.5.6",
+    "hono": "4.5.6",
     "honox": "^0.1.24",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.0.0",

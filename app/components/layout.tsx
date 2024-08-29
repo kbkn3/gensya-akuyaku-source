@@ -1,5 +1,8 @@
+import { useRequestContext } from 'hono/jsx-renderer'
 import { SITE_TITLE } from '../constants'
 import Header1 from './header1'
+import { Kiriban } from './kiriban'
+import { kiribanUpdate } from '../lib/kiribanUpdate'
 
 export const menuItems = [
   { title: 'Home', href: '/' },
@@ -32,7 +35,7 @@ const footerMenuItems = [
   },
 ]
 
-export default function BaseLayout({
+export default async function BaseLayout({
   children,
   title = '資料集',
   top = false,
@@ -42,6 +45,8 @@ export default function BaseLayout({
   title?: string
   top?: boolean
 }) {
+  const c = useRequestContext()
+  const currentNumberOfVisitors = await kiribanUpdate(c)
   return (
     <div className='min-h-screen bg-gray-100 flex flex-col'>
       <header className='bg-white shadow flex flex-col'>
@@ -102,6 +107,12 @@ export default function BaseLayout({
               ))}
             </ul>
           </div>
+          <div className='my-4 bg-white shadow rounded mb-4 p-4'>
+            <h2 className='text-lg font-semibold mb-4'>キリ番カウンター</h2>
+            <Kiriban count={currentNumberOfVisitors} />
+            <h2 className='text-lg font-semibold my-4'>本サイトの管理人</h2>
+            <p>管理人：runakeikain</p>
+          </div>
         </nav>
 
         {/* Content */}
@@ -111,8 +122,13 @@ export default function BaseLayout({
             {children}
           </article>
         </main>
+        <div className='bg-white shadow rounded mb-4 p-6 prose mt-12 md:hidden'>
+          <h2 className='text-lg font-semibold mb-4'>キリ番カウンター</h2>
+          <Kiriban count={currentNumberOfVisitors} />
+          <h2 className='text-lg font-semibold my-4'>本サイトの管理人</h2>
+          <p>管理人：runakeikain</p>
+        </div>
       </div>
-
       {/* Footer */}
       <footer className='bg-gray-200 mt-8 py-8'>
         <div className='container mx-auto px-4'>

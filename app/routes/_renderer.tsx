@@ -30,7 +30,8 @@ export default jsxRenderer(({ children, frontmatter }) => {
       ? `${frontmatter.title}`
       : menuItems.filter(item => item.href.includes(currentPath))[0]?.title,
   )}${frontmatter?.subTitle ? `&subTitle=${encodeURIComponent(frontmatter.subTitle)}` : ''}&siteTitle=${encodeURIComponent(
-    SITE_TITLE)}`
+    SITE_TITLE,
+  )}`
 
   return (
     <html lang='ja'>
@@ -43,7 +44,7 @@ export default jsxRenderer(({ children, frontmatter }) => {
         <meta property='og:title' content={pageTitle} />
         <meta property='og:description' content={description} />
         <meta property='og:image' content={ogImagePath} />
-        <meta property='og:locale' content='ja_JP'/>
+        <meta property='og:locale' content='ja_JP' />
         {/* Twitter */}
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:site' content='@kbkn3' />
