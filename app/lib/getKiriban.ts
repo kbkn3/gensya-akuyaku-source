@@ -15,6 +15,5 @@ export const getKiriban = async (c: Context) => {
   const kiribanList = await db
     .select()
     .from(getter)
-    .where(eq(getter.name, 'kiriban'))
   return kiribanList
 }
