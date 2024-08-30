@@ -5,7 +5,15 @@ import type { Config } from 'tailwindcss'
 export default {
   content: ['./app/**/*.tsx'],
   theme: {
-    extend: {},
+    extend: {
+      borderStyle: {
+        'ridge': 'ridge',
+      },
+      fontFamily: {
+        'seg': ['seg'],
+        'seg-mini': ['seg-mini'],
+      },
+    },
   },
   plugins: [require('@tailwindcss/typography'), daisyui],
   daisyui: {

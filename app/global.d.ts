@@ -1,5 +1,7 @@
 import {} from 'hono'
 import type { Meta } from './routes/types'
+import type { DrizzleD1Database } from 'drizzle-orm/d1'
+
 
 type Head = {
   title?: string
@@ -9,10 +11,12 @@ type Head = {
 
 declare module 'hono' {
   interface Env {
-    // biome-ignore lint/complexity/noBannedTypes: <explanation>
-    Variables: {}
-    // biome-ignore lint/complexity/noBannedTypes: <explanation>
-    Bindings: {}
+    Variables: {
+      db: DrizzleD1Database
+    }
+    Bindings: {
+      DB: D1Database
+    }
   }
   interface ContextRenderer {
     // biome-ignore lint/style/useShorthandFunctionType: <explanation>
