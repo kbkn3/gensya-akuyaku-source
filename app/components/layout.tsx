@@ -3,6 +3,7 @@ import { SITE_TITLE } from '../constants'
 import Header1 from './header1'
 import { Kiriban } from './kiriban'
 import { kiribanUpdate } from '../lib/kiribanUpdate'
+import { getKiriban } from '../lib/getKiriban'
 
 export const menuItems = [
   { title: 'Home', href: '/' },
@@ -47,6 +48,8 @@ export default async function BaseLayout({
 }) {
   const c = useRequestContext()
   const currentNumberOfVisitors = await kiribanUpdate(c)
+  const kiribanList = await getKiriban(c)
+
   return (
     <div className='min-h-screen bg-gray-100 flex flex-col'>
       <header className='bg-white shadow flex flex-col'>
@@ -110,6 +113,12 @@ export default async function BaseLayout({
           <div className='my-4 bg-white shadow rounded mb-4 p-4'>
             <h2 className='text-lg font-semibold mb-4'>キリ番カウンター</h2>
             <Kiriban count={currentNumberOfVisitors} />
+            <h2 className='text-lg font-semibold my-4'>キリ番リスト</h2>
+            <ul>
+              {kiribanList.map((item, index) => (
+                <li key={`${item.count}-${index}`}>{item.count}番: {item.name}</li>
+              ))}
+            </ul>
             <h2 className='text-lg font-semibold my-4'>本サイトの管理人</h2>
             <p>管理人：runakeikain</p>
           </div>
@@ -125,6 +134,12 @@ export default async function BaseLayout({
         <div className='bg-white shadow rounded mb-4 p-6 prose mt-12 md:hidden'>
           <h2 className='text-lg font-semibold mb-4'>キリ番カウンター</h2>
           <Kiriban count={currentNumberOfVisitors} />
+          <h2 className='text-lg font-semibold my-4'>キリ番リスト</h2>
+          <ul>
+            {kiribanList.map((item, index) => (
+              <li key={`${item.count}-${index}`}>{item.count}番: {item.name}</li>
+            ))}
+          </ul>
           <h2 className='text-lg font-semibold my-4'>本サイトの管理人</h2>
           <p>管理人：runakeikain</p>
         </div>
