@@ -20,5 +20,11 @@ database_name="gensya"
 database_id="e43fcbef-2a61-4939-aeb0-5fdddbf925dc"
 migrations_dir="drizzle/migrations"
 
+[[env.production.d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "gensya_prod"
+database_id = "8c9cea6a-44a3-4ce4-b14c-92c3b921a8dc"
+migrations_dir="drizzle/migrations"
+
 # [ai]
 # binding = "AI"

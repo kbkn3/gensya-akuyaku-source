@@ -9,6 +9,7 @@
     "migration:generate": "drizzle-kit generate",
     "migration:apply:local": "wrangler d1 migrations apply gensya --local",
     "migration:apply:remote": "wrangler d1 migrations apply gensya --remote",
+    "migration:apply:prod:remote": "wrangler d1 migrations apply gensya_prod --remote",
     "build": "vite build --mode client && vite build",
     "preview": "wrangler pages dev",
     "deploy": "$npm_execpath run build && wrangler pages deploy"
