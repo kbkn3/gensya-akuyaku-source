@@ -8,14 +8,14 @@ export default createRoute(
     strictTransportSecurity: 'max-age=63072000; includeSubDomains; preload',
     contentSecurityPolicy: import.meta.env.PROD
       ? {
-          defaultSrc: ["'self'", '*.gensya-akuyaku-source.pages.dev'],
+          defaultSrc: ["'self'", 'gensya-akuyaku-source.pages.dev' ,'*.gensya-akuyaku-source.pages.dev'],
           scriptSrc: [NONCE, '*.gensya-akuyaku-source.pages.dev'],
           styleSrc: [
             "'self'",
             "'unsafe-inline'",
             'https://fonts.googleapis.com',
           ],
-          fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+          fontSrc: ["'self'"],
           imgSrc: ["'self'", 'data:', 'https:'],
           connectSrc: ["'self'"],
         }
