@@ -9,7 +9,7 @@ export default createRoute(
     contentSecurityPolicy: import.meta.env.PROD
       ? {
           scriptSrc: [NONCE],
-          defaultSrc: ["'self'"],
+          defaultSrc: ["'self' *.gensya-akuyaku-source.pages.dev"],
         }
       : undefined,
   }),
