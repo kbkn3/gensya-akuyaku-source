@@ -9,13 +9,13 @@ export default createRoute(
     contentSecurityPolicy: import.meta.env.PROD
       ? {
           defaultSrc: ["'self'", 'gensya-akuyaku-source.pages.dev' ,'*.gensya-akuyaku-source.pages.dev'],
-          scriptSrc: [NONCE, '*.gensya-akuyaku-source.pages.dev'],
+          scriptSrc: [NONCE, 'gensya-akuyaku-source.pages.dev', '*.gensya-akuyaku-source.pages.dev'],
           styleSrc: [
             "'self'",
             "'unsafe-inline'",
             'https://fonts.googleapis.com',
           ],
-          fontSrc: ["'self'"],
+          fontSrc: ["'self'", 'https://fonts.gstatic.com'],
           imgSrc: ["'self'", 'data:', 'https:'],
           connectSrc: ["'self'"],
         }
