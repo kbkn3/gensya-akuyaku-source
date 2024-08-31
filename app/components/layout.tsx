@@ -4,6 +4,7 @@ import Header1 from './header1'
 import { Kiriban } from './kiriban'
 import { kiribanUpdate } from '../lib/kiribanUpdate'
 import { getKiriban } from '../lib/getKiriban'
+import { ShareButton } from '../islands/shareButton'
 
 export const menuItems = [
   { title: 'Home', href: '/' },
@@ -111,6 +112,8 @@ export default async function BaseLayout({
             </ul>
           </div>
           <div className='my-4 bg-white shadow rounded mb-4 p-4'>
+            <h2 className='text-lg font-semibold mb-4'>シェアボタン</h2>
+            <ShareButton title={title}/>
             <h2 className='text-lg font-semibold mb-4'>キリ番カウンター</h2>
             <Kiriban count={currentNumberOfVisitors} />
             <h2 className='text-lg font-semibold my-4'>キリ番リスト</h2>
@@ -132,6 +135,8 @@ export default async function BaseLayout({
           </article>
         </main>
         <div className='bg-white shadow rounded mb-4 p-6 prose mt-12 md:hidden'>
+          <h2 className='text-lg font-semibold mb-4'>シェアボタン</h2>
+          <ShareButton title={title}/>
           <h2 className='text-lg font-semibold mb-4'>キリ番カウンター</h2>
           <Kiriban count={currentNumberOfVisitors} />
           <h2 className='text-lg font-semibold my-4'>キリ番リスト</h2>
