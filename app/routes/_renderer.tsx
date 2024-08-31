@@ -53,17 +53,17 @@ export default jsxRenderer(({ children, frontmatter }) => {
 
         <title>{pageTitle}</title>
         <link rel='icon' href='/favicon.ico' />
-        {/* <Link href='/app/style.css' rel='stylesheet' /> */}
-        {import.meta.env.PROD ? (
+        <Link href='/app/style.css' rel='stylesheet' />
+        {/* {import.meta.env.PROD ? (
           <link href="/static/assets/style.css" rel="stylesheet" />
         ) : (
           <link href="/app/style.css" rel="stylesheet" />
-        )}
+        )} */}
         <link
           rel='stylesheet'
           href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block'
         />
-        <Script src='/app/client.ts' async />
+        <Script src='/app/client.ts' async nonce={c.get('secureHeadersNonce')}/>
         <Style />
       </head>
       <body>
