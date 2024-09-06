@@ -6,7 +6,6 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import { defineConfig, loadEnv } from 'vite'
 import client from 'honox/vite/client'
-import honoSitemapPlugin from './app/sitemap'
 
 export default defineConfig(({ mode }) => {
   process.env = {...process.env, ...loadEnv(mode, process.cwd())};
@@ -32,12 +31,6 @@ export default defineConfig(({ mode }) => {
       mdx({
         jsxImportSource: 'hono/jsx',
         remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
-      }),
-      honoSitemapPlugin({
-        hostname: process.env.IS_PROD ? 'https://gensya-akuyaku-source.pages.dev/' :process.env.CF_PAGES_URL,
-        exclude: ['/random'],
-        priority: {'/': '1.0', '/timeline': '0.8', '/posts/*': '0.6'},
-        frequency: {'/': 'daily', '/timeline': 'monthly', '/posts/*': 'weekly'},
       }),
     ],
   }

@@ -10,7 +10,8 @@
       "DOM"
     ],
     "paths": {
-      "vite": ["./node_modules/vite"]
+      "vite": ["./node_modules/vite"],
+      "hono": ["./node_modules/hono"]
     },
     "types": [
       "vite/client",
