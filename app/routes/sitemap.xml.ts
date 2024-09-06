@@ -4,8 +4,8 @@ import sitemap from '../lib/sitemap'
 
 const route = new Hono()
 
-route.get('/', c => {
-  const { data , status, headers } = sitemap({
+route.get('/', async c => {
+  const { data , status, headers } = await sitemap({
     app,
     hostname: import.meta.env.IS_PROD ? 'https://gensya-akuyaku-source.pages.dev/' :import.meta.env.CF_PAGES_URL,
     exclude: ['/random'],
